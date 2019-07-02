@@ -117,10 +117,16 @@ def reobfArtifact = artifacts.add('default', reobfFile) {
     type 'jar'
     builtBy 'reobfJar'
 }
+def deobfFile = file("$buildDir/deobfJar/output.jar")
+def deobfArtifact = artifacts.add('default', deobfFile) {
+    type 'jar'
+    builtBy 'jar'
+}
 publishing {
     publications {
         mavenJava(MavenPublication) {
             artifact reobfArtifact
+            artifact deobfArtifact
         }
     }
     repositories {

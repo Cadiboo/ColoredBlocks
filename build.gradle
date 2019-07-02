@@ -125,7 +125,6 @@ publishing {
     publications {
         mavenJava(MavenPublication) {
             artifact reobfArtifact
-            artifact jar
         }
     }
     repositories {

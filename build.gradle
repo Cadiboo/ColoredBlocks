@@ -108,6 +108,10 @@ jar {
     }
 }
 
+artifacts {
+	archives(jar)
+}
+
 // Example configuration to allow publishing using the maven-publish task
 // we define a custom artifact that is sourced from the reobfJar output task
 // and then declare that to be published
@@ -117,16 +121,11 @@ def reobfArtifact = artifacts.add('default', reobfFile) {
     type 'jar'
     builtBy 'reobfJar'
 }
-def deobfFile = file("$buildDir/deobfJar/output.jar")
-def deobfArtifact = artifacts.add('default', deobfFile) {
-    type 'jar'
-    builtBy 'jar'
-}
 publishing {
     publications {
         mavenJava(MavenPublication) {
             artifact reobfArtifact
-            artifact deobfArtifact
+            artifact jar
         }
     }
     repositories {
